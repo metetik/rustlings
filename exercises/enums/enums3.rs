@@ -5,7 +5,7 @@
 // Execute `rustlings hint enums3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+use std::convert::TryInto;
 
 enum Message {
     Move(Point),
@@ -46,6 +46,14 @@ impl State {
         // variants
         // Remember: When passing a tuple as a function argument, you'll need
         // extra parentheses: fn function((t, u, p, l, e))
+
+        match message {
+            Message::Move(point) => self.move_position(point),
+            Message::Echo(s) => self.echo(s),
+            Message::ChangeColor(c1, c2, c3) =>
+                self.change_color((c1.try_into().unwrap(), c2.try_into().unwrap(), c3.try_into().unwrap())),
+            Message::Quit => self.quit()
+        }
     }
 }
 
